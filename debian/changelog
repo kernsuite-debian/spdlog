@@ -1,0 +1,5 @@
+spdlog (1.4-1) UNRELEASED; urgency=low
+
+  * Initial release (Closes: #<bug>)
+
+ -- Michael R. Crusoe <crusoe@ucdavis.edu>  Fri, 18 Sep 2015 20:31:46 -0700
