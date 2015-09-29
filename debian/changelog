@@ -1,4 +1,4 @@
-spdlog (1.4-1) UNRELEASED; urgency=low
+spdlog (1.4-1) unstable; urgency=low
 
   * Initial release (Closes: #800337)
 
