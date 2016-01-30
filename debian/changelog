@@ -1,3 +1,9 @@
+spdlog (1.6-1) UNRELEASED; urgency=medium
+
+  * Update to version 1.6
+
+ -- Michael R. Crusoe <crusoe@ucdavis.edu>  Sat, 30 Jan 2016 05:33:59 -0800
+
 spdlog (1.4-1) unstable; urgency=low
 
   * Initial release (Closes: #800337)

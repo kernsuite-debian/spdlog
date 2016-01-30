@@ -2,3 +2,7 @@
 
 %:
 	dh $@
+
+override_dh_auto_test:
+	cd tests && ${MAKE}
+	dh_auto_test
