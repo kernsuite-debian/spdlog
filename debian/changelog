@@ -1,4 +1,4 @@
-spdlog (1.6-1) UNRELEASED; urgency=medium
+spdlog (1.6-1) unstable; urgency=medium
 
   * Update to version 1.6
   * Ship examples, tests. Run the tests during build time and added
