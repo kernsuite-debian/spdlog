@@ -1,6 +1,8 @@
 spdlog (1.6-1) UNRELEASED; urgency=medium
 
   * Update to version 1.6
+  * Ship examples, tests. Run the tests during build time and added
+    autopkgtest hook.
 
  -- Michael R. Crusoe <crusoe@ucdavis.edu>  Sat, 30 Jan 2016 05:33:59 -0800
 

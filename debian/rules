@@ -3,6 +3,10 @@
 %:
 	dh $@
 
+override_dh_auto_install:
+	rm -f example/logs/.gitignore
+	dh_auto_install
+
 override_dh_auto_test:
-	cd tests && ${MAKE}
+	cd tests && ${MAKE} tests clean
 	dh_auto_test

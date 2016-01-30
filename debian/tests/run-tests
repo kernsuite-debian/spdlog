@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#set -x
+#set -e
+ 
+pkg=libspdlog-dev
+if [ "$ADTTMP" = "" ] ; then
+  ADTTMP=`mktemp -d /tmp/${pkg}-test.XXXXXX`
+fi
+cd $ADTTMP
+
+cp -rs /usr/share/doc/libspdlog-dev/tests/ .
+cd tests
+gunzip < catch.hpp.gz > catch.hpp
+make
