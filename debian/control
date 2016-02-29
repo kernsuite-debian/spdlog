@@ -1,17 +1,18 @@
 Source: spdlog
-Section: libdevel
-Priority: optional
 Maintainer: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>
 Uploaders: Michael R. Crusoe <crusoe@ucdavis.edu>
+Section: libdevel
+Priority: optional
 Build-Depends: debhelper (>= 9)
-Standards-Version: 3.9.6
+Standards-Version: 3.9.7
 Vcs-Browser: https://anonscm.debian.org/cgit/debian-med/spdlog.git
 Vcs-Git: https://anonscm.debian.org/git/debian-med/spdlog.git
 Homepage: https://github.com/COMBINE-lab/spdlog
 
 Package: libspdlog-dev
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
 Description: Very fast, header only, C++ logging library
  Features: Very fast - performance is the primary goal; Headers only; No
  dependencies - just copy and use; call style using the excellent cppformat
