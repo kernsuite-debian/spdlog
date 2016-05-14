@@ -1,3 +1,11 @@
+spdlog (1.7-1) unstable; urgency=medium
+
+  * new upstream release
+  * Standards-Version: increment to 3.9.8
+  * Match upstream's switch to cmake
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Sat, 14 May 2016 11:06:05 -0700
+
 spdlog (1.6-2) unstable; urgency=medium
 
   * Fix VCS-Git URL.
