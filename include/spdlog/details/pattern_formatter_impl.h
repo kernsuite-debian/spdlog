@@ -1,39 +1,23 @@
-/*************************************************************************/
-/* spdlog - an extremely fast and easy to use c++11 logging library.     */
-/* Copyright (c) 2014 Gabi Melman.                                       */
-/*                                                                       */
-/* Permission is hereby granted, free of charge, to any person obtaining */
-/* a copy of this software and associated documentation files (the       */
-/* "Software"), to deal in the Software without restriction, including   */
-/* without limitation the rights to use, copy, modify, merge, publish,   */
-/* distribute, sublicense, and/or sell copies of the Software, and to    */
-/* permit persons to whom the Software is furnished to do so, subject to */
-/* the following conditions:                                             */
-/*                                                                       */
-/* The above copyright notice and this permission notice shall be        */
-/* included in all copies or substantial portions of the Software.       */
-/*                                                                       */
-/* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       */
-/* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF    */
-/* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.*/
-/* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY  */
-/* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,  */
-/* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE     */
-/* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
-/*************************************************************************/
+//
+// Copyright(c) 2015 Gabi Melman.
+// Distributed under the MIT License (http://opensource.org/licenses/MIT)
+//
 
 #pragma once
 
-#include <string>
+#include <spdlog/formatter.h>
+#include <spdlog/details/log_msg.h>
+#include <spdlog/details/os.h>
+#include <spdlog/details/format.h>
+
 #include <chrono>
+#include <ctime>
 #include <memory>
-#include <vector>
+#include <mutex>
+#include <string>
 #include <thread>
-
-
-#include "../formatter.h"
-#include "./log_msg.h"
-#include "./os.h"
+#include <utility>
+#include <vector>
 
 namespace spdlog
 {
@@ -225,7 +209,7 @@ class I_formatter :public flag_formatter
     }
 };
 
-// ninutes 0-59
+// minutes 0-59
 class M_formatter :public flag_formatter
 {
     void format(details::log_msg& msg, const std::tm& tm_time) override
@@ -336,8 +320,10 @@ public:
 
         int h = total_minutes / 60;
         int m = total_minutes % 60;
-        char sign = h >= 0 ? '+' : '-';
-        msg.formatted << sign;
+        if (h >= 0) //minus sign will be printed anyway if negative
+        {
+            msg.formatted << '+';
+        }
         pad_n_join(msg.formatted, h, m, ':');
     }
 private:
