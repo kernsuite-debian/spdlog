@@ -5,18 +5,28 @@
 
 #pragma once
 
+
 #include <string>
 #include <initializer_list>
 #include <chrono>
 #include <memory>
+#include <atomic>
 #include <exception>
-
-//visual studio does not support noexcept yet
-#ifndef _MSC_VER
-#define SPDLOG_NOEXCEPT noexcept
-#else
-#define SPDLOG_NOEXCEPT throw()
+#if defined(_WIN32) && defined(SPDLOG_WCHAR_FILENAMES)
+#include <codecvt>
+#include <locale>
 #endif
+
+#include <spdlog/details/null_mutex.h>
+
+
+//visual studio upto 2013 does not support noexcept
+#if defined(_MSC_VER) && (_MSC_VER < 1900)
+#define SPDLOG_NOEXCEPT throw()
+#else
+#define SPDLOG_NOEXCEPT noexcept
+#endif
+
 
 
 namespace spdlog
@@ -34,7 +44,11 @@ using log_clock = std::chrono::system_clock;
 using sink_ptr = std::shared_ptr < sinks::sink >;
 using sinks_init_list = std::initializer_list < sink_ptr >;
 using formatter_ptr = std::shared_ptr<spdlog::formatter>;
-
+#if defined(SPDLOG_NO_ATOMIC_LEVELS)
+using level_t = details::null_atomic_int;
+#else
+using level_t = std::atomic_int;
+#endif
 
 //Log level enum
 namespace level
@@ -94,5 +108,26 @@ private:
     std::string _msg;
 
 };
+
+//
+// wchar support for windows file names (SPDLOG_WCHAR_FILENAMES must be defined)
+//
+#if defined(_WIN32) && defined(SPDLOG_WCHAR_FILENAMES)
+#define SPDLOG_FILENAME_T(s) L ## s
+using filename_t = std::wstring;
+inline std::string filename_to_str(const filename_t& filename)
+{
+    std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> c;
+    return c.to_bytes(filename);
+}
+#else
+#define SPDLOG_FILENAME_T(s) s
+using filename_t = std::string;
+
+inline std::string filename_to_str(const filename_t& filename)
+{
+    return filename;
+}
+#endif
 
 } //spdlog
