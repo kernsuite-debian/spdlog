@@ -1,3 +1,10 @@
+spdlog (1.11-1) unstable; urgency=medium
+
+  * new upstream release
+  * debian/copyright: updated to track latest code movement
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Fri, 26 Aug 2016 09:23:31 -0700
+
 spdlog (1.8-1) unstable; urgency=medium
 
   * new upstream release
