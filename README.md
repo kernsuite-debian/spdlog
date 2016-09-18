@@ -14,8 +14,7 @@ Just copy the source [folder](https://github.com/gabime/spdlog/tree/master/inclu
 
 ##Features
 * Very fast - performance is the primary goal (see [benchmarks](#benchmarks) below).
-* Headers only.
-* No dependencies - just copy and use.
+* Headers only, just copy and use.
 * Feature rich [call style](#usage-example) using the excellent [fmt](https://github.com/fmtlib/fmt) library.
 * Extremely fast asynchronous mode (optional) - using lockfree queues and other tricks to reach millions of calls/sec.
 * [Custom](https://github.com/gabime/spdlog/wiki/3.-Custom-formatting) formatting.
@@ -24,7 +23,7 @@ Just copy the source [folder](https://github.com/gabime/spdlog/tree/master/inclu
     * Rotating log files.
     * Daily log files.
     * Console logging (colors supported).
-    * Linux syslog.
+    * syslog.
     * Easily extendable with custom log targets  (just implement a single function in the [sink](include/spdlog/sinks/sink.h) interface).
 * Severity based filtering - threshold levels can be modified in runtime as well as in compile time.
 
@@ -58,13 +57,7 @@ Time needed to log 1,000,000 lines in asynchronous mode, i.e. the time it takes 
 
 ## Usage Example
 ```c++
-//
-// Copyright(c) 2015 Gabi Melman.
-// Distributed under the MIT License (http://opensource.org/licenses/MIT)
-//
-//
-// spdlog usage example
-//
+
 #include "spdlog/spdlog.h"
 
 #include <iostream>
@@ -83,7 +76,7 @@ int main(int, char*[])
         // Multithreaded color console
         auto console = spd::stdout_logger_mt("console", true);
         console->info("Welcome to spdlog!");
-        console->error("An info message example {}..", 1);
+        console->info("An info message example {}..", 1);
 
         // Formatting examples
         console->warn("Easy padding in numbers like {:08d}", 12);
@@ -162,13 +155,13 @@ void async_example()
         async_file->info("Async message #{}", i);
 }
 
-//syslog example (linux/osx only)
+//syslog example
 void syslog_example()
 {
-#if defined (__linux__) || defined(__APPLE__)
+#ifdef SPDLOG_ENABLE_SYSLOG 
     std::string ident = "spdlog-example";
     auto syslog_logger = spd::syslog_logger("syslog", ident, LOG_PID);
-    syslog_logger->warn("This is warning that will end up in syslog. This is Linux only!");
+    syslog_logger->warn("This is warning that will end up in syslog..");
 #endif
 }
 
