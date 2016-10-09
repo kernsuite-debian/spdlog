@@ -12,8 +12,7 @@ Homepage: https://github.com/COMBINE-lab/spdlog
 
 Package: libspdlog-dev
 Architecture: any
-Depends: ${shlibs:Depends},
-         ${misc:Depends}
+Depends: ${misc:Depends}
 Description: Very fast, header only, C++ logging library
  Features: Very fast - performance is the primary goal; Headers only; No
  dependencies - just copy and use; call style using the excellent cppformat
