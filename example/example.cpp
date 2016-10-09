@@ -13,6 +13,7 @@
 
 void async_example();
 void syslog_example();
+void android_example();
 void user_defined_example();
 void err_handler_example();
 
@@ -24,7 +25,7 @@ int main(int, char*[])
         // Multithreaded color console
         auto console = spd::stdout_logger_mt("console", true);
         console->info("Welcome to spdlog!");
-        console->error("An info message example {}..", 1);
+        console->error("An error message example {}..", 1);
 
         // Formatting examples
         console->warn("Easy padding in numbers like {:08d}", 12);
@@ -48,7 +49,6 @@ int main(int, char*[])
         auto my_logger = spd::basic_logger_mt("basic_logger", "logs/basic.txt");
         my_logger->info("Some log message");
 
-
         // Create a file rotating logger with 5mb size max and 3 rotated files
         auto rotating_logger = spd::rotating_logger_mt("some_logger_name", "logs/mylogfile", 1048576 * 5, 3);
         for (int i = 0; i < 10; ++i)
@@ -56,6 +56,8 @@ int main(int, char*[])
 
         // Create a daily logger - a new file is created every day on 2:30am
         auto daily_logger = spd::daily_logger_mt("daily_logger", "logs/daily", 2, 30);
+        // trigger flush if the log severity is error or higher
+        daily_logger->flush_on(spd::level::err);
         daily_logger->info(123.44);
 
         // Customize msg format for all messages
@@ -73,6 +75,9 @@ int main(int, char*[])
 
         // syslog example. linux/osx only
         syslog_example();
+
+        // android example. compile with NDK
+        android_example();
 
         // Log user-defined types example
         user_defined_example();
@@ -102,6 +107,7 @@ void async_example()
     size_t q_size = 4096; //queue size must be power of 2
     spdlog::set_async_mode(q_size);
     auto async_file = spd::daily_logger_st("async_file_logger", "logs/async_log.txt");
+
     for (int i = 0; i < 100; ++i)
         async_file->info("Async message #{}", i);
 }
@@ -113,6 +119,16 @@ void syslog_example()
     std::string ident = "spdlog-example";
     auto syslog_logger = spd::syslog_logger("syslog", ident, LOG_PID);
     syslog_logger->warn("This is warning that will end up in syslog.");
+#endif
+}
+
+// Android example
+void android_example()
+{
+#if defined(__ANDROID__)
+    std::string tag = "spdlog-android";
+    auto android_logger = spd::android_logger("android", tag);
+    android_logger->critical("Use \"adb shell logcat\" to view this message.");
 #endif
 }
 
@@ -145,4 +161,3 @@ void err_handler_example()
     });
     spd::get("console")->info("some invalid message to trigger an error {}{}{}{}", 3);
 }
-
