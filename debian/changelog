@@ -1,3 +1,10 @@
+spdlog (1:0.11.0-1) UNRELEASED; urgency=medium
+
+  * Switch to correct upstream, increment epoch due to different version
+    numbering. Mea culpa!
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Sun, 09 Oct 2016 01:12:16 -0700
+
 spdlog (1.12-1) unstable; urgency=medium
 
   * new upstream release
