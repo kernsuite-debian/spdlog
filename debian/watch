@@ -1,9 +1,3 @@
 version=3
-# Uncomment to find new files on Github
-#  - when using releases:
-https://github.com/COMBINE-lab/spdlog/releases .*/archive/v(\d[\d.-]+)\.(?:tar(?:\.gz|\.bz2)?|tgz)
-# Remark: frequently you can do s/#PREFIX#/v?/ since 'v' or nothing is quite common but there are other prefixes possible
-
-# if you need to repack and choose +dfsg prefix
-# opts=dversionmangle=s/[~\+]dfsg[0-9]*// \
-#
+ opts=dversionmangle=s/[0-9]*://,uversionmangle=s/(\d[\d.-]+)/1:$1/ \
+https://github.com/gabime/spdlog/releases .*/archive/v(\d[\d.-]+)\.(?:tar(?:\.gz|\.bz2)?|tgz)
