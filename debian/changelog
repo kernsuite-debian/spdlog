@@ -1,3 +1,9 @@
+spdlog (1:0.11.0-2kern1) xenial; urgency=medium
+
+  * rebuild for kern
+
+ -- Gijs Molenaar (launchpad ppa build key) <gijs@pythonic.nl>  Tue, 18 Oct 2016 11:57:33 +0200
+
 spdlog (1:0.11.0-2) unstable; urgency=medium
 
   * Correct URL to upstream
