@@ -1,3 +1,11 @@
+spdlog (1:0.11.0-3) unstable; urgency=medium
+
+  * Allow stderr, fixes autopkgtests; fix courtesy Graham Inggs
+    <ginggs@debian.org>. (Closes: #854469)
+  * Update standards-version to 4.1.1; no changes needed.
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Sat, 14 Oct 2017 10:30:35 -0700
+
 spdlog (1:0.11.0-2) unstable; urgency=medium
 
   * Correct URL to upstream
