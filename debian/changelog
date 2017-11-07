@@ -1,3 +1,9 @@
+spdlog (1:0.11.0-2kern2) xenial; urgency=medium
+
+  * update signature
+
+ -- KERN packaging <packaging@kernsuite.info>  Tue, 07 Nov 2017 16:54:46 +0200
+
 spdlog (1:0.11.0-2kern1) xenial; urgency=medium
 
   * rebuild for kern
